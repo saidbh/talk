@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Admin\Accounts;
 
-use App\Models\Contacts;
 use Illuminate\Routing\Controller;
+use App\Models\profile;
+use App\Models\User;
+use App\Models\UserRole;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -18,7 +22,7 @@ class AccountsController extends Controller
      */
     public function index()
     {
-        $users = Contacts::all();
+        $users = profile::all();
         return view('admin.users.index', compact('users'));
     }
 
@@ -45,36 +49,46 @@ class AccountsController extends Controller
             'lastName' => 'bail|required|string|min:3',
             'email' => 'bail|required|email',
             'phone' => 'bail|required|string|min:8',
-            'address' => 'bail|required|string',
-            'city' => 'bail|required|string',
-            'region' => 'bail|required|string',
-            'zipcode' => 'bail|required|string|min:4',
+            'gender' => 'bail|required|string',
+            'country' => 'bail|required|string',
+            'password' => 'bail|required|string|min:4',
+            'con-password' => 'bail|required|string|min:4|same:password',
         ]);
         if($validator->fails()){
             Session::flash('error',$validator->errors()->first());
             return redirect()->back()->withInput();
         }
         try{
-            $contact = new Contacts();
-            $contact->first_name = $request->firstName;
-            $contact->last_name = $request->lastName;
-            $contact->email = $request->email;
-            $contact->phone = $request->phone;
-            $contact->gender = $request->gender;
-            $contact->birthday = $request->birthday;
-            $contact->address_line = $request->address;
-            $contact->city = $request->city;
-            $contact->region = $request->region;
-            $contact->zip_code= $request->zipcode;
-            $contact->save();
+            $user = new User();
+            $user->agencies_id = null;
+            $user->email = $request->email;
+            $user->phone = $request->phone;
+            $user->password = Hash::make($request->password);
+            $user->api_token = Str::random(60);
+            $user->activated = 1;
+            $user->blocked = 0;
+            $user->save();
+            $useRole = new UserRole();
+            $useRole->users_id = $user->id;
+            $useRole->roles_id = 2;
+            $useRole->save();
+            $profile = new profile();
+            $profile->first_name = $request->firstName;
+            $profile->last_name = $request->lastName;
+            $profile->users_id = $user->id;
+            $profile->email = $request->email;
+            $profile->phone = $request->phone;
+            $profile->gender = $request->gender;
+            $profile->birthday = $request->birthday;
+            $profile->save();
 
         }catch(QueryException $e){
             Session::flash('error', $e->getMessage());
             return redirect()->back()->withInput();
         }
 
-        Session::flash('success', "Utilisateur créer avec succés");
-        return redirect()->route('users-accounts.list');
+        Session::flash('success', "Compte créer avec succés");
+        return redirect()->route('login');
     }
 
     /**

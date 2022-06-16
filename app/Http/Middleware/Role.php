@@ -22,10 +22,10 @@ class Role
         {
             return redirect()->route('login');
         }
-        if (\auth()->user()->userRole->id == 3 && $role == 'user')
+        if (\auth()->user()->userRole->roles_id == 2 && $role == 'user')
         {
             return $next($request);
-        }elseif(\auth()->user()->userRole->id != 3 && $role == 'admin')
+        }elseif(\auth()->user()->userRole->roles_id != 2 && $role == 'admin')
             {
                 return $next($request);
             }

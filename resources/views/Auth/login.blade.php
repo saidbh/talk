@@ -89,26 +89,92 @@
                         </div>
                         <div class="row mt-3">
                             <div class="col-lg-12 text-center">
-                                <button type="button" class="btn btn-success btn-lg btn-block w-50" data-toggle="modal" data-target="#exampleModal">Create account</button>
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                ...
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                <button type="button" class="btn btn-success btn-lg btn-block w-50" data-bs-toggle="modal" data-bs-target="#signup">Create account</button>
+                                <div class="modal fade" id="signup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLabel">Signup</h5>
+                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <form action="{{ route('users-accounts.store') }}" method="post" enctype="multipart/form-data" class="was-validated">
+                                            @csrf
+                                            @method('post')
+                                        <div class="modal-body">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="firstName">Nom</label>
+                                                            <input type="text" class="form-control" id="firstName" name="firstName" aria-describedby="firstName" value="{{old('firstName')}}" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="lastName">Prénom</label>
+                                                            <input type="text" class="form-control" id="lastName" name="lastName" aria-describedby="firstName" value="{{ old('lastName') }}" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="email">E-mail</label>
+                                                            <input type="email" class="form-control" id="email" name="email" aria-describedby="email" value="{{ old('email') }}" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="phone">téléphone</label>
+                                                            <input type="text" class="form-control" id="phone"  name="phone" aria-describedby="phone" value="{{ old('phone') }}" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="gender">Genre</label>
+                                                            <select class="form-control" id="gender" name="gender" required>
+                                                                <option value="Male">Homme</option>
+                                                                <option value="Female">Femme</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="birthday">Date de naissance</label>
+                                                            <input type="date" class="form-control" id="birthday" name="birthday" aria-describedby="birthday" value="{{ old('birthday') }}" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="city">Pays</label>
+                                                            <input type="text" class="form-control" id="country" name="country" aria-describedby="country" value="{{ old('country') }}" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="city">Password</label>
+                                                            <input type="password" class="form-control" id="password" name="password" aria-describedby="password" value="{{ old('city') }}" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="city">Confirm-password</label>
+                                                            <input type="password" class="form-control" id="con-password" name="con-password" aria-describedby="con-password" value="{{ old('city') }}" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                            <button type="submit" class="btn btn-success">Valider</button>
+                                        </div>
+                                        </form>
+                                      </div>
                                     </div>
-                                </div>
+                                  </div>
                             </div>
                         </div>
                     </div>

@@ -1,5 +1,6 @@
 <?php
 namespace  App\Http\Controllers;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Session;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::post('users-registration', [Admin\Accounts\AccountsController::class,'store'])->name('users-accounts.store');
 Route::group(['middleware'=>['auth:web','routes', 'Role:user'],'except'=>'logout'],function(){
        Route::get('logout',function(){
         Session::flush();

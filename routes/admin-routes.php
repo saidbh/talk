@@ -28,7 +28,6 @@ Route::group(['middleware'=>['auth:web','routes', 'Role:admin'],'except'=>'logou
         Route::resource('users-accounts', Accounts\AccountsController::class)->names([
             'index' => 'users-accounts.list',
             'create' => 'users-accounts.create',
-            'store' => 'users-accounts.store',
             'edit' => 'users-accounts.edit',
             'update' => 'users-accounts.update',
             'destroy' => 'users-accounts.destroy'

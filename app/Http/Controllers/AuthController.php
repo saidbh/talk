@@ -46,10 +46,10 @@ class AuthController extends Controller
 //            } else if(Auth::user()->third){
 //                Session::put('user_type', 'étudiant');
 //            }
-            if (Auth::user()->userRole->id != 3)
+            if (Auth::user()->userRole->roles_id != 2)
             {
                 return redirect()->route('admin.dashboard');
-            }elseif (Auth::user()->userRole->id == 3)
+            }elseif (Auth::user()->userRole->roles_id == 2)
             {
                 return redirect()->route('user.dashboard');
             }

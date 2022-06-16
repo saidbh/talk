@@ -19,13 +19,14 @@
                                     <div class="col-md-12 d-flex flex-row align-items-center justify-content-between">
                                         <h4 class="card-title m-0">Liste des utilisateurs</h4>
                                         <div class="d-flex flex-row">
-                                        </div>
+{{--                                             <a href="#" class="btn mx-1 btn-success" data-toggle="modal" data-target="#adduser">Ajouter</a>
+ --}}                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="iq-card-body">
-                                <table id="users-table" class="table table-sm table-striped table-bordered mt-4" role="grid" aria-describedby="user-list-page-info">
+                                <table id="reports-table" class="table table-sm table-striped table-bordered mt-4" role="grid" aria-describedby="user-list-page-info">
                                     <thead>
                                     <tr class="text-center">
                                         <th>ID</th>
@@ -39,24 +40,11 @@
                                         <th>City</th>
                                         <th>Region</th>
                                         <th>Code postal</th>
+                                        <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($users as $user)
-                                    <tr>
-                                        <td class="text-center">{{ $user->id }}</td>
-                                        <td class="text-center">{{ $user->first_name }}</td>
-                                        <td class="text-center">{{ $user->last_name }}</td>
-                                        <td class="text-center">{{ $user->email }}</td>
-                                        <td class="text-center">{{ $user->phone }}</td>
-                                        <td class="text-center">{{ $user->gender }}</td>
-                                        <td class="text-center">{{ $user->birthday }}</td>
-                                        <td class="text-center">{{ $user->address_line }}</td>
-                                        <td class="text-center">{{ $user->city }}</td>
-                                        <td class="text-center">{{ $user->region }}</td>
-                                        <td class="text-center">{{ $user->zip_code }}</td>
-                                    </tr>
-                                        @endforeach
+
                                     </tbody>
                                 </table>
                         </div>
@@ -88,7 +76,7 @@
 
     <script>
         $(document).ready(function() {
-            $('#users-table').DataTable({
+            $('#reports-table').DataTable({
                 "columnDefs": [{
                     "targets": 9,
                     "orderable": false
