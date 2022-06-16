@@ -17,9 +17,29 @@
     </ul>
     <form class="form-inline mt-2 mt-md-0">
       <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <div class="btn-group dropstart">
+          <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <img  src="https://images.pexels.com/photos/6062496/pexels-photo-6062496.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="" 
+            style="  width: 40px;
+            height: 40px;
+            border-radius: 75%;" />
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a href="#" id="logout" class="dropdown-item" >Logout</a></li>
+          </ul>
+        </div> 
     </form>
   </div>
 </nav>
+<form action="{{ route('logout') }}" method="GET" id="formlogout">
+  @csrf
+</form>
+<script>
+  $('#logout').on('click', function(){
+    $('#formlogout').submit();
+  });
+</script>
 <div style="margin-bottom: 8%;">
 </div>

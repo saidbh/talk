@@ -22,4 +22,11 @@ Route::group(['middleware'=>['auth:web','routes', 'Role:user'],'except'=>'logout
              return redirect('login');
          })->name('logout');
     Route::get('/', [Users\DashboardController::class, 'index'])->name('user.dashboard');
+    Route::resource('users-newsFeed', Users\newsFeedsController::class)->names([
+        'index' => 'users-newsFeed.list',
+        'create' => 'users-newsFeed.create',
+        'edit' => 'users-newsFeed.edit',
+        'update' => 'users-newsFeed.update',
+        'destroy' => 'users-newsFeed.destroy'
+    ]);
 });
